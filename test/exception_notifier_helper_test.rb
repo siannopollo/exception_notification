@@ -37,7 +37,9 @@ class ExceptionNotifierHelperTest < Test::Unit::TestCase
   # Controller with filtering
 
   class ControllerWithFilterParameters
-    def filter_parameters(params); :filtered end
+    def filter_parameters(params)
+      params.is_a?(Symbol) || params.keys.include?('RAW_POST_DATA') ? :filtered : params
+    end
   end
 
   def test_should_filter_env_values_for_raw_post_data_keys_if_controller_can_filter_parameters
