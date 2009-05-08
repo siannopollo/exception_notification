@@ -90,12 +90,11 @@ module ExceptionNotifiable
     
     def rescue_action_in_public(exception)
       case exception
-        when *self.class.exceptions_to_treat_as_404
-          render_404
-        else
-          render_500
-          deliver_exception_message(exception)
-        end
+      when *self.class.exceptions_to_treat_as_404
+        render_404
+      else
+        render_500
+        deliver_exception_message(exception)
       end
     end
 end
